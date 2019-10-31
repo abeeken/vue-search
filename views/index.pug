@@ -1,0 +1,22 @@
+extends layout/layout.pug
+
+block content
+    .row
+        .col
+            #searchBox.p-3
+                form#searchform.form-horizontal(action="#" method="get" autocomplete="off")
+                    .formElement.input-group
+                        input#s.search-input.ui-autocomplete-input.form-control(type="text" name="query" maxlength="1000" value="" placeholder="Search The Library" autocomplete="off" role="search")
+                        span.input-group-btn
+                            button#searchsubmit.btn.btn-primary(type="submit")
+                                | Search
+
+                    .d-flex.justify-content-end
+                        a(v-bind:href="links[searchradio]")
+                            | Advanced Search
+                        
+                    .search-radios.d-flex.justify-content-center.pt-2
+                        label.p-2(v-for="radio in radios")
+                            input(type="radio" name="target" v-bind:value="radio.value" v-model="searchradio")
+                            |  {{ radio.text }}
+                        input(type="hidden" name="facet[0]" value="fulltext:yes")
